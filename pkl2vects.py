@@ -1,5 +1,8 @@
-import pkl
+import pickle
 import numpy as np
+import argparse
+import sys
+import os
 
 
 def get_vects(obj, F=8000):
@@ -24,3 +27,34 @@ def get_vects(obj, F=8000):
                         F_counter += 1
 
     return X, M
+
+# Get command line arguments
+commandLineParser = argparse.ArgumentParser()
+commandLineParser.add_argument('PKL', type=str, help='Specify pkl file')
+commandLineParser.add_argument('OUT', type=str, help='Specify output pkl file')
+commandLineParser.add_argument('--F', default=8000, type=int, help='Specify maximum number of frames in phone instance')
+
+
+args = commandLineParser.parse_args()
+pkl_file = args.PKL
+out_file = args.OUT
+F = args.F
+
+# Save the command run
+if not os.path.isdir('CMDs'):
+    os.mkdir('CMDs')
+with open('CMDs/pkl2vects.cmd', 'a') as f:
+    f.write(' '.join(sys.argv)+'\n')
+
+pkl = pickle.load(open(pkl_file, "rb"))
+print("Loaded pkl")
+
+# Get the batched tensors
+X, M = get_vects(pkl, F)
+
+# Get the output labels
+y = (pkl['score'])
+
+# Save to pickle file
+pkl_obj = [X.tolist(), M.tolist(), y]
+pickle.dump(pkl_obj, open(out_file, "wb"))
