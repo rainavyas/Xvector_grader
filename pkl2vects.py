@@ -5,10 +5,10 @@ import sys
 import os
 
 
-def get_vects(obj, F=8000):
+def get_vects(obj, F=30000):
     n = len(obj['plp'][0][0][0][0][0]) # dimension of mfcc vector
     N = len(obj['plp'])
-    
+
     # Define required tensors
     X = np.zeros((N, F, n))
     M = np.zeros((N, F, n))
@@ -34,7 +34,7 @@ def get_vects(obj, F=8000):
 commandLineParser = argparse.ArgumentParser()
 commandLineParser.add_argument('PKL', type=str, help='Specify pkl file')
 commandLineParser.add_argument('OUT', type=str, help='Specify output pkl file')
-commandLineParser.add_argument('--F', default=8000, type=int, help='Specify maximum number of frames in phone instance')
+commandLineParser.add_argument('--F', default=30000, type=int, help='Specify maximum number of frames in phone instance')
 
 
 args = commandLineParser.parse_args()
