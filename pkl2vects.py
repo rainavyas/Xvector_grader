@@ -7,7 +7,8 @@ import os
 
 def get_vects(obj, F=8000):
     n = len(obj['plp'][0][0][0][0][0]) # dimension of mfcc vector
-
+    N = len(obj['plp'])
+    
     # Define required tensors
     X = np.zeros((N, F, n))
     M = np.zeros((N, F, n))
