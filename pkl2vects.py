@@ -25,6 +25,7 @@ def get_vects(obj, F=8000):
                         X[spk][F_counter] = x
                         M[spk][F_counter] = np.ones(n)
                         F_counter += 1
+        print(F_counter)
 
     return X, M
 
