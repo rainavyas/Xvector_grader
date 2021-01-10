@@ -175,7 +175,9 @@ lr = 8*1e-2
 epochs = 100
 sch = 0.985
 
-model = Xvector()
+mfcc_features = 13
+
+model = Xvector(mfcc_features)
 model.to(device)
 criterion = torch.nn.MSELoss(reduction='mean')
 optimizer = torch.optim.SGD(deep_model.parameters(), lr=lr, momentum = 0.9, nesterov=True)
