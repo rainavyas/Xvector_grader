@@ -160,7 +160,7 @@ y_train = y[validation_size:]
 y_val = y[:validation_size]
 
 # Store as a dataset
-train_ds = TensorDataset(X_train, M_train, y)
+train_ds = TensorDataset(X_train, M_train, y_train)
 val_ds = TensorDataset(X_val, M_val, y_val)
 
 # Use dataloader to handle batches easily

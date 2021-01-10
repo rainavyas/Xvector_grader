@@ -51,11 +51,12 @@ with open('CMDs/pkl2vects.cmd', 'a') as f:
 pkl = pickle.load(open(pkl_file, "rb"))
 print("Loaded pkl")
 
+# Get the output labels
+y = (pkl['score'])
+
 # Get the batched tensors
 X, M = get_vects(pkl, F)
 
-# Get the output labels
-y = (pkl['score'])
 
 # Save to pickle file
 pkl_obj = [X.tolist(), M.tolist(), y]
