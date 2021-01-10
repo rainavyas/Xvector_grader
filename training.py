@@ -125,7 +125,7 @@ args = commandLineParser.parse_args()
 pkl_file = args.PKL
 out_file = args.OUT
 seed = args.seed
-torch.manual(seed)
+torch.manual_seed(seed)
 
 # Get the device
 device = get_default_device()
