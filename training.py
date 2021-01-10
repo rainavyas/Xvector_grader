@@ -7,6 +7,7 @@ import os
 import argparse
 from models import Xvector
 import time
+import pickle
 
 def get_default_device():
     if torch.cuda.is_available():
