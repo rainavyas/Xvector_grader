@@ -5,7 +5,6 @@ import numpy as np
 import sys
 import os
 import argparse
-from pkl2vects import get_vects
 from models import Xvector
 import time
 
