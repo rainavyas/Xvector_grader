@@ -180,7 +180,7 @@ mfcc_features = 13
 model = Xvector(mfcc_features)
 model.to(device)
 criterion = torch.nn.MSELoss(reduction='mean')
-optimizer = torch.optim.SGD(deep_model.parameters(), lr=lr, momentum = 0.9, nesterov=True)
+optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum = 0.9, nesterov=True)
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size = 1, gamma = sch)
 
 for epoch in range(epochs):
