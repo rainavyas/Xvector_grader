@@ -47,5 +47,5 @@ class Xvector(torch.nn.Module):
         h6 = F.relu(self.fc6(xvector))
         h7 = F.relu(self.fc7(h6))
         h8 = F.relu(self.fc8(h7))
-        y = self.fc9(h8)
+        y = self.fc9(h8).squeeze()
         return y
