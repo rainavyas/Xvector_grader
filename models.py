@@ -44,4 +44,4 @@ class Xvector(torch.nn.Module):
         # Pass through rest of DNN for score prediction
         h6 = F.relu(self.fc6(xvector))
         y = self.fc7(h6)
-        return y
+        return y.squeeze()
