@@ -40,10 +40,10 @@ class Xvector_TDNN(torch.nn.Module):
         '''
         # Pass through TDNN layers
         l1 = self.frame1(X)
-        l2 = self.frame1(l1)
-        l3 = self.frame1(l2)
-        l4 = self.frame1(l3)
-        l5 = self.frame1(l4)
+        l2 = self.frame2(l1)
+        l3 = self.frame3(l2)
+        l4 = self.frame4(l3)
+        l5 = self.frame5(l4)
 
         # Stats pooling to get x-vector
         x_vect = stats_pooling(l5, M)

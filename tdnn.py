@@ -10,7 +10,7 @@ class TDNN(nn.Module):
 
     def __init__(
                     self,
-                    input_dim=23,
+                    input_dim=13,
                     output_dim=512,
                     context_size=5,
                     stride=1,
