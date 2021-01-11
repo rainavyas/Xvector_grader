@@ -9,8 +9,8 @@ class Xvector(torch.nn.Module):
         self.fc2 = torch.nn.Linear(200, 200)
         self.fc3 = torch.nn.Linear(200, 200)
         self.fc4 = torch.nn.Linear(200, 200)
-        self.fc5 = torch.nn.Linear(200, 200)
-        self.fc6 = torch.nn.Linear(200, 200)
+        self.fc5 = torch.nn.Linear(200, 512)
+        self.fc6 = torch.nn.Linear(512, 200)
         self.fc7 = torch.nn.Linear(200, 1)
 
     def forward(self, X, M):
@@ -36,7 +36,9 @@ class Xvector(torch.nn.Module):
 
         # Calculate X-vectors by mean over frames
         h5_reshaped = torch.reshape(h5, (X.size(0), X.size(1), h5.size(1)))
+        print("h5_reshaped ", h5_reshaped.size())
         M_resized = M[:,:,0].repeat(1,1,h5_reshaped.size(2))
+        print("M_resized ", M_resized.size())
         h5_masked = h5_reshaped * M_resized
         frame_length = torch.sum(M[:,:,0].squeeze(), dim=1)
         xvector = torch.sum(h5_masked, dim=1)/frame_length
