@@ -35,7 +35,7 @@ class Xvector(torch.nn.Module):
         h5 = F.relu(self.fc5(h4))
 
         # Calculate X-vectors by mean over frames
-        h5_reshaped = torch.reshape(h5, (X.size(0), X.size(1), h5.size(2)))
+        h5_reshaped = torch.reshape(h5, (X.size(0), X.size(1), h5.size(1)))
         M_resized = M[:,:,0].repeat(1,1,h5_reshaped.size(2))
         h5_masked = h5_reshaped * M_resized
         frame_length = torch.sum(M[:,:,0].squeeze(), dim=1)
