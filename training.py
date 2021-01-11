@@ -5,7 +5,7 @@ import numpy as np
 import sys
 import os
 import argparse
-from models import Xvector
+from models import Xvector_TDNN as Xvector
 import time
 import pickle
 
