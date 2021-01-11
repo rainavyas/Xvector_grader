@@ -38,6 +38,7 @@ class Xvector(torch.nn.Module):
         h5_reshaped = torch.reshape(h5, (X.size(0), X.size(1), h5.size(1)))
         print("h5_reshaped ", h5_reshaped.size())
         M_resized = M[:,:,0].repeat(1,1,h5_reshaped.size(2))
+        print("M cut ", M[:,:,0].size())
         print("M_resized ", M_resized.size())
         h5_masked = h5_reshaped * M_resized
         frame_length = torch.sum(M[:,:,0].squeeze(), dim=1)
