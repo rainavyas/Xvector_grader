@@ -5,13 +5,15 @@ class Xvector(torch.nn.Module):
     def __init__(self, num_features=13):
         super(Xvector, self).__init__()
         self.bn1 = torch.nn.BatchNorm1d(num_features=num_features)
-        self.fc1 = torch.nn.Linear(num_features, 200)
-        self.fc2 = torch.nn.Linear(200, 200)
-        self.fc3 = torch.nn.Linear(200, 200)
-        self.fc4 = torch.nn.Linear(200, 200)
-        self.fc5 = torch.nn.Linear(200, 512)
-        self.fc6 = torch.nn.Linear(512, 200)
-        self.fc7 = torch.nn.Linear(200, 1)
+        self.fc1 = torch.nn.Linear(num_features, 500)
+        self.fc2 = torch.nn.Linear(500, 500)
+        self.fc3 = torch.nn.Linear(500, 500)
+        self.fc4 = torch.nn.Linear(500, 500)
+        self.fc5 = torch.nn.Linear(500, 512)
+        self.fc6 = torch.nn.Linear(512, 600)
+        self.fc7 = torch.nn.Linear(600, 600)
+        self.fc8 = torch.nn.Linear(600, 600)
+        self.fc9 = torch.nn.Linear(600, 1)
 
     def forward(self, X, M):
         '''
@@ -39,9 +41,11 @@ class Xvector(torch.nn.Module):
         M_resized = M[:,:,0].unsqueeze(dim=2).repeat(1,1,h5_reshaped.size(2))
         h5_masked = h5_reshaped * M_resized
         frame_length = torch.sum(M[:,:,0].squeeze(), dim=1).unsqueeze(dim=1).repeat(1,h5_masked.size(2))
-        xvector = torch.sum(h5_masked, dim=1)/frame_length
+        xvector = (torch.sum(h5_masked, dim=1)/frame_length).squeeze()
 
         # Pass through rest of DNN for score prediction
         h6 = F.relu(self.fc6(xvector))
-        y = self.fc7(h6)
-        return y.squeeze()
+        h7 = F.relu(self.fc7(h6))
+        h8 = F.relu(self.fc8(h7))
+        y = self.fc9(h8)
+        return y
