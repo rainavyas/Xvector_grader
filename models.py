@@ -39,6 +39,8 @@ class Xvector(torch.nn.Module):
         M_resized = M[:,:,0].unsqueeze(dim=2).repeat(1,1,h5_reshaped.size(2))
         h5_masked = h5_reshaped * M_resized
         frame_length = torch.sum(M[:,:,0].squeeze(), dim=1)
+        print("h5 masked ", h5_masked.size())
+        print("frame length ", frame_length.size())
         xvector = torch.sum(h5_masked, dim=1)/frame_length
 
         # Pass through rest of DNN for score prediction
