@@ -25,7 +25,7 @@ class Xvector_TDNN(torch.nn.Module):
         xvector_mean = (torch.sum(masked, dim=1)/frame_length).squeeze()
         xvector_std = (torch.sum((masked**2), dim=1)/frame_length) - (xvector_mean**2)
         xvector = torch.cat((xvector_mean, xvector_std), dim=1)
-        return x vector
+        return x_vector
 
     def forward(self, X, M):
         '''
