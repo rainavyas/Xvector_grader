@@ -8,3 +8,5 @@ The aim is to use the same idea for spoken language assessment.
 
 # Dependencies
 
+pip install torch, torchvision
+
