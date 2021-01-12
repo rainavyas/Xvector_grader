@@ -46,7 +46,7 @@ class Xvector_TDNN(torch.nn.Module):
         l5 = self.frame5(l4)
 
         # Stats pooling to get x-vector
-        x_vect = stats_pooling(l5, M)
+        x_vect = self.stats_pooling(l5, M)
 
         # Predict speaker grade
         h1 = F.relu(self.fc1(x_vect))
